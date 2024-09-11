@@ -1,13 +1,20 @@
 {%extends "base.html"%}
+
+{%load static%}
+
 {%block content%}
 <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
+  {%if post.image%}
+  <img src="/media/{{post.image}}" class="card-img-top" alt="...">
+  {%else%}
+  <img src="/static/default.png" class="card-img-top" alt="...">
+  {%endif%}
   <div class="card-body">
     <h5 class="card-title">{{post.title}}</h5>
     <p class="card-text">{{post.content}}</p>
     <p class="card-text">{{post.rate}}</p>
     <p class="card-text">{{post.created_at}}</p>
-    <a href="#" class="btn btn-primary">Go to post</a>
+    <a href="/posts/{{post.id}}/" class="btn btn-primary">Go to post</a>
   </div>
 </div>
 {%endblock%}
