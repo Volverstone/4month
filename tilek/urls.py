@@ -20,15 +20,19 @@ from posts.views import (test_view, main_page_view,answer_view,shablon_view,
                          post_list_view, post_detail_view, privet_view, post_create_view)
 from django.conf import settings
 from django.conf.urls.static import static
+from user.views import register_view, login_view, logout_view
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('register/', register_view, name = 'register'),
+    path('login',login_view, name = 'login'),
+    path('logout/', logout_view, name = "logout"),
     path('test/',test_view),
-    path('',main_page_view),
+    path('',main_page_view, name = 'main_page'),
     path('shablon/',shablon_view),
     path('answer/',answer_view),
-    path("posts/", post_list_view),
-    path("posts/<int:post_id>/",post_detail_view),
+    path("posts/", post_list_view, name="post_list"),
+    path("posts/<int:post_id>/",post_detail_view, name = "post_detail"),
     path("privet/",  privet_view),
-    path("posts/create/", post_create_view),
+    path("posts/create/", post_create_view, name='post_create'),
 ] +  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

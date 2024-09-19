@@ -5,6 +5,9 @@ from posts.models import Post, Comment
 from django.shortcuts import redirect
 
 from posts.form import PostForm2, CommentForm
+from django.contrib.auth.decorators import login_required
+
+
 # Create your views here.
 def test_view(request):
     return HttpResponse (f"Hello,world{random.randint(0,1000)}")
@@ -21,6 +24,7 @@ def shablon_view(request):
 def answer_view(request):
     return render(request,"view2.html")
 
+@login_required(login_url="login")
 def post_list_view(request):
     if request.method == "GET":
         posts = Post.objects.all()
