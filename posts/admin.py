@@ -20,6 +20,6 @@ class TagAdmin(admin.ModelAdmin):
 
 
 @admin.register(Comment)
-class TagAdmin(admin.ModelAdmin):
+class CommentAdmin(admin.ModelAdmin):
     list_display = ["text", "post"]
     list_display_links = ["text", "post"]
