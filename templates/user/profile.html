@@ -1,0 +1,35 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block content%}
+<div class="card" style="width: 18rem;  display:flex; justify-content: center; margin-top: 90px; margin: auto ">
+  {%if user.profile.image%}
+  <img src="{{user.profile.image.url}}" class="card-img-top" alt="...">
+  {%else%}
+  <img src="/static/default.png" class="card-img-top" alt="...">
+  {%endif%}
+  <div class="card-body">
+    <h5 class="card-title">{{user.username}}</h5>
+    <p class="card-text">{{user.email}}</p>
+    <p class="card-text">{{user.first_name}}</p>
+    <p class="card-text">{{user.last_name}}</p>
+  </div>
+</div>
+{%for post in posts%}
+  <div class="card" style="width: 18rem; margin-top: 50px;">
+  {%if post.image%}
+  <img src="{{post.image.url}}" class="card-img-top" alt="...">
+  {%else%}
+  <img src="/static/default.png" class="card-img-top" alt="...">
+  {%endif%}
+  <div class="card-body">
+    <h5 class="card-title">{{post.title}}</h5>
+    <p class="card-text">{{post.content}}</p>
+    <p class="card-text">{{post.rate}}</p>
+    <p class="card-text">{{post.created_at}}</p>
+
+    <a href="/posts/{{post.id}}/" class="btn btn-primary">Go to post</a>
+  </div>
+</div>
+  {%endfor%}
+{%endblock%}

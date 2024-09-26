@@ -17,10 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from posts.views import (test_view, main_page_view,answer_view,shablon_view,
-                         post_list_view, post_detail_view, privet_view, post_create_view)
+                         post_list_view, post_detail_view, privet_view, post_create_view,
+                         update_view, PostListView, PostCreateView, PostDetailView)
 from django.conf import settings
 from django.conf.urls.static import static
-from user.views import register_view, login_view, logout_view
+from user.views import register_view, login_view, logout_view, profile_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', register_view, name = 'register'),
@@ -29,10 +30,15 @@ urlpatterns = [
     path('test/',test_view),
     path('',main_page_view, name = 'main_page'),
     path('shablon/',shablon_view),
+    path("posts2/", PostListView.as_view(), name="post_list"),
+    path("posts2/create", PostCreateView.as_view(), name="post_create"),
+    path("posts2/<int:post_id>/",PostDetailView.as_view(), name="post_detail"),
     path('answer/',answer_view),
     path("posts/", post_list_view, name="post_list"),
     path("posts/<int:post_id>/",post_detail_view, name = "post_detail"),
     path("privet/",  privet_view),
     path("posts/create/", post_create_view, name='post_create'),
+    path("profile/", profile_view, name="profile"),
+    path("posts/<int:post_id>/update", update_view, name='post_update')
 ] +  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -22,6 +23,7 @@ class Tag(models.Model):
         return f"{self.name}"
 
 class Post(models.Model):
+    author = models.ForeignKey(User, related_name="posts", on_delete=models.CASCADE, null=True)
     image = models.ImageField(blank=True, null=True, upload_to="posts")
     title = models.CharField(max_length=100)
     content = models.TextField(null=True, blank=True)
@@ -29,7 +31,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True,null=True)
     updated_at = models.DateTimeField(auto_now_add=True,null=True)
     category = models.ForeignKey(Category, on_delete = models.CASCADE, null=True, blank=True, related_name="posts")
-    tags = models.ManyToManyField(Tag,null=True, blank=True)
+    tags = models.ManyToManyField(Tag, null=True, blank=True)
 
 
     def __str__(self):
