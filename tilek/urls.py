@@ -22,6 +22,7 @@ from posts.views import (test_view, main_page_view,answer_view,shablon_view,
 from django.conf import settings
 from django.conf.urls.static import static
 from user.views import register_view, login_view, logout_view, profile_view
+from parser.views import ParserView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', register_view, name = 'register'),
@@ -39,6 +40,7 @@ urlpatterns = [
     path("privet/",  privet_view),
     path("posts/create/", post_create_view, name='post_create'),
     path("profile/", profile_view, name="profile"),
-    path("posts/<int:post_id>/update", update_view, name='post_update')
+    path("posts/<int:post_id>/update", update_view, name='post_update'),
+    path("parsing/", ParserView.as_view(), name='parser' )
 ] +  static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
